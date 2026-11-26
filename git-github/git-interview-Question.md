@@ -371,6 +371,420 @@ Deployment Pipeline Triggered
 
 ---
 
+A fork creates a copy of another person's repository in your own GitHub account.
+
+```text
+Original Repository
+        ↓
+      Fork
+        ↓
+Your GitHub Account
+```
+
+### Why use Fork?
+
+- Open Source Contribution
+- Experiment safely
+- Personal copy of a public project
+
+### Difference Between Fork and Clone
+
+| Fork | Clone |
+|--------|--------|
+| GitHub Copy | Local Copy |
+| Created on GitHub | Created on Local Machine |
+| Remote Repository | Local Repository |
+
+---
+
+## Private Repository
+
+### What is a Private Repository?
+
+A repository whose contents are accessible only to authorized users.
+
+### Why use Private Repositories?
+
+- Company source code
+- Infrastructure code
+- Jenkins pipelines
+- Terraform projects
+- Internal documentation
+
+### Difference Between Public and Private Repository
+
+| Public | Private |
+|----------|----------|
+| Accessible by everyone | Restricted access |
+| Open source projects | Enterprise projects |
+| Anyone can clone | Only authorized users |
+
+---
+
+## Collaborators
+
+### What is a Collaborator?
+
+A GitHub user who has been granted access to a repository.
+
+### How to Add a Collaborator?
+
+```text
+Repository
+    ↓
+Settings
+    ↓
+Collaborators
+    ↓
+Add People
+```
+
+### Available Permissions
+
+- Read
+- Triage
+- Write
+- Maintain
+- Admin
+
+### Interview Question
+
+#### What is the role of a collaborator?
+
+A collaborator allows multiple users to work on the same repository according to assigned permissions.
+
+---
+
+## Protected Branches
+
+### What is a Protected Branch?
+
+A branch with rules that prevent accidental or unauthorized changes.
+
+Commonly protected branches:
+
+```text
+main
+master
+production
+release
+```
+
+### Why Protect a Branch?
+
+- Prevent direct pushes
+- Enforce pull requests
+- Require approvals
+- Run CI/CD validations
+- Protect production code
+
+### Common Rules
+
+#### Require Pull Request
+
+```text
+No direct push allowed
+```
+
+#### Require Approval
+
+```text
+At least one reviewer approval required
+```
+
+#### Require Status Checks
+
+```text
+Jenkins
+GitHub Actions
+Azure DevOps
+```
+
+must pass before merge.
+
+#### Restrict Push Access
+
+Allow only selected users to push.
+
+### Interview Question
+
+#### Why do companies protect the main branch?
+
+To ensure code quality through reviews, approvals, and automated checks before changes reach production.
+
+---
+
+## Git Tags
+
+### What is a Tag?
+
+A tag marks a specific commit.
+
+Usually used for releases:
+
+```text
+v1.0
+v1.1
+v2.0
+```
+
+```bash
+git show v1.0
+```
+
+### Push Single Tag
+
+```bash
+git push origin v1.0
+```
+
+### Push All Tags
+
+```bash
+git push origin --tags
+```
+
+### Delete Local Tag
+
+```bash
+git tag -d v1.0
+```
+
+### Delete Remote Tag
+
+```bash
+git push origin --delete v1.0
+```
+
+---
+
+## Undoing Changes in Git
+
+This is one of the most frequently asked DevOps interview topics.
+
+---
+
+# 1. Discard Changes from Working Directory
+
+Situation:
+
+```text
+File modified
+Not staged
+```
+
+Command:
+
+```bash
+git restore file.txt
+```
+
+Older syntax:
+
+```bash
+git checkout -- file.txt
+```
+
+### Result
+
+```text
+Changes discarded
+```
+
+---
+
+# 2. Remove Changes from Staging Area
+
+Situation:
+
+```bash
+git add file.txt
+```
+
+File is staged.
+
+```text
+File removed from staging area
+Changes still exist
+```
+
+---
+
+# 3. Discard All Working Directory Changes
+
+```bash
+git restore .
+```
+
+### Result
+
+```text
+All unstaged modifications removed
+```
+
+---
+
+# 4. Undo Last Commit (Keep Changes)
+
+### Soft Reset
+
+```bash
+git reset --soft HEAD~1
+```
+
+### Result
+
+```text
+Commit removed
+Changes remain staged
+```
+
+---
+
+# 5. Undo Last Commit (Keep Files)
+
+### Mixed Reset
+
+```bash
+git reset --mixed HEAD~1
+```
+
+### Result
+
+```text
+Commit removed
+Files become unstaged
+```
+
+---
+
+# 6. Undo Last Commit (Delete Everything)
+
+### Hard Reset
+
+```bash
+git reset --hard HEAD~1
+```
+
+### Result
+
+```text
+Commit removed
+Changes removed
+Files restored to previous state
+```
+
+⚠️ Dangerous command.
+
+---
+
+# 7. Undo a Specific Commit Safely
+
+### Revert
+
+```bash
+git revert <commit-id>
+```
+
+Example:
+
+```bash
+git revert a1b2c3d
+```
+
+### Result
+
+```text
+History preserved
+New reverse commit created
+```
+
+---
+
+## Difference Between Reset and Revert
+
+| git reset | git revert |
+|------------|------------|
+| Rewrites history | Preserves history |
+| Dangerous on shared branches | Safe on shared branches |
+| Removes commits | Adds reverse commit |
+| Local cleanup | Production rollback |
+
+---
+
+## Frequently Asked Interview Questions
+
+### Difference Between Fork and Clone?
+
+**Fork**
+- GitHub copy
+- Created on GitHub
+
+**Clone**
+- Local copy
+- Created on local machine
+
+---
+
+### What is a Protected Branch?
+
+A branch with rules that prevent direct modifications and enforce review processes.
+
+---
+
+### Why are Tags Used?
+
+To identify and manage software releases such as:
+
+```text
+v1.0
+v1.1
+v2.0
+```
+
+---
+
+### How do you unstage a file?
+
+
+because history remains intact.
+
+---
+
+## Must Remember Commands
+
+```bash
+git fork            # GitHub feature
+
+git clone
+
+git tag
+
+git tag -a
+
+git push origin --tags
+
+git restore file.txt
+
+git restore --staged file.txt
+
+git reset --soft HEAD~1
+
+git reset --mixed HEAD~1
+
+git reset --hard HEAD~1
+
+git revert <commit-id>
+
+git branch -vv
+
+git branch -a
+
+git push origin --delete branch-name
+```
+
+---
+
 ## Must Remember Commands
 
 ```bash
