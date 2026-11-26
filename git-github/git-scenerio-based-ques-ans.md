@@ -1,3 +1,61 @@
+# 🎯 Scenario-Based Git & GitHub Interview Questions
+
+---
+
+## Scenario 1: Accidentally Staged a File
+
+### Question
+
+You ran:
+
+```bash
+git add .
+```
+
+but accidentally staged a sensitive file.
+
+How do you remove it from staging without deleting it?
+
+### Answer
+
+```bash
+git restore --staged sensitive-file.txt
+```
+
+or
+
+```bash
+git reset sensitive-file.txt
+```
+
+---
+
+## Scenario 2: Discard Local Changes
+
+### Question
+
+You modified:
+
+```text
+main.tf
+```
+
+but want to discard all uncommitted changes.
+
+### Answer
+
+```bash
+git restore main.tf
+```
+
+---
+
+## Scenario 3: Untracked File Cleanup
+
+### Question
+
+You created several files for testing.
+
 ```text
 test1.txt
 test2.txt
@@ -72,36 +130,31 @@ Need to remove commit and move files back to working directory.
 
 ### Answer
 
-
-### Question
-
-Terraform code deployed to production caused issues.
-
-Need to rollback safely.
-
-### Answer
-
-Preferred:
-
 ```bash
-git revert <commit-id>
-```
-
-Reason:
-
-```text
-Preserves history
-Creates rollback commit
-Safe for production
+git reset --mixed HEAD~1
 ```
 
 ---
 
-## Scenario 9: Hotfix Required in Production
+## Scenario 7: Remove Everything
 
 ### Question
 
-A critical bug is found in production.
+You want Git to forget the last commit and all changes.
+
+### Answer
+
+```bash
+git reset --hard HEAD~1
+```
+
+⚠️ Dangerous
+
+---
+
+## Scenario 8: Production Deployment Failed
+
+### Question
 
 How would you fix it?
 
@@ -146,8 +199,36 @@ git cherry-pick <commit-id>
 
 ---
 
+## Scenario 11: Branch Behind Main
+
+### Question
+
+You worked on:
+
+```text
+feature/terraform-module
+```
+
+Meanwhile main got new commits.
+
+Need latest main changes.
+
+### Answer
+
 ```bash
-git status
+git checkout feature/terraform-module
+
+git rebase main
+```
+
+or
+
+```bash
+git merge main
+```
+
+---
+
 ```
 
 Open file.
@@ -218,6 +299,11 @@ git merge --abort
 
 ### Question
 
+Rebase is in progress and conflicts are too complicated.
+
+### Answer
+
+git rebase -i HEAD~15
 ```
 
 Use:
@@ -290,7 +376,16 @@ Immediate actions:
 
 ---
 
-## Scenario 21: Main Branch Protection
+
+```text
+PR Required
+Approval Required
+Pipeline Success Required
+```
+
+---
+
+## Scenario 22: Terraform Team Workflow
 
 ### Question
 
