@@ -1,26 +1,77 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.utkarsh.portfolio</groupId>
-
     <artifactId>portfolio-management-platform</artifactId>
-
     <version>1.0.0</version>
 
     <packaging>pom</packaging>
 
-    <modules>
-
-        <module>services/portfolio-services</module>
-
-    </modules>
-
+    <!-- Common Properties -->
     <properties>
-
-    <java.version>17</java.version>
-
+        <java.version>17</java.version>
+        <spring.boot.version>3.5.0</spring.boot.version>
+        <junit.version>5.13.0</junit.version>
+        <maven.compiler.plugin.version>3.14.0</maven.compiler.plugin.version>
     </properties>
 
+    <!-- Microservices -->
+    <modules>
+	<module>services/portfolio-services</module>
+        <module>services/trade-service</module>
+        <module>services/client-service</module>
+    </modules>
+
+    <!-- Centralized Dependency Version Management -->
+    <dependencyManagement>
+
+        <dependencies>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+
+        </dependencies>
+
+    </dependencyManagement>
+
+    <!-- Centralized Plugin Management -->
+    <build>
+
+        <pluginManagement>
+
+            <plugins>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+
+                    <artifactId>maven-compiler-plugin</artifactId>
+
+                    <version>${maven.compiler.plugin.version}</version>
+
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+
+                </plugin>
+
+            </plugins>
+
+        </pluginManagement>
+
+    </build>
 
 </project>
